@@ -45,9 +45,10 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   // console.log(`FundMe deployed at ${fundMeInstance.address}`);
   // let usd = await fundMeInstance.MINIMUM_USD();
   // console.log(usd.toString());
+  // await fundMeInstance.fund({ value: ethers.utils.parseEther("0.1") });
 
   if (!developmentChains.includes(chainId) && process.env.ETHERSCAN_API_KEY) {
-    verify(fundMeDeployment.address, [ethUsdPriceFeedAddress]);
+    await verify(fundMeDeployment.address, [ethUsdPriceFeedAddress]);
   }
 };
 
@@ -55,3 +56,4 @@ module.exports.tags = ["all", "fundme"];
 
 // 0x81959Db160DA6466e041404A0DC253f2b648885b => here it is a address where last time deployed on sepolia test net gas=852229
 // if it fail sometime then run deployment with --gasprice 1300000000000 flag
+// 0x4C6c436F2e3BA1a2b9cA24273aC1d9bf80e3C42E => verify not submitting need to see on that => Done => Working fine now
